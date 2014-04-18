@@ -147,6 +147,18 @@ module.exports = (function () {
     }
     return keepGoing;
   };
+  
+  walkStrategies.pre_do_not_skip_siblings = function depthFirstPreOrder(callback, context) {
+    var i, childCount, keepGoing;
+    keepGoing = callback.call(context, this);
+    for (i = 0, childCount = this.children.length; i < childCount; i++) {
+      if (keepGoing === false) {
+        return true;
+      }
+      keepGoing = depthFirstPreOrder.call(this.children[i], callback, context);
+    }
+    return keepGoing;
+  };
 
   walkStrategies.post = function depthFirstPostOrder(callback, context) {
     var i, childCount, keepGoing;
