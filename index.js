@@ -148,16 +148,16 @@ module.exports = (function () {
     return keepGoing;
   };
   
-  walkStrategies.pre_do_not_skip_siblings = function depthFirstPreOrder(callback, context) {
+  walkStrategies.pre_do_not_skip_siblings = function depthFirstPreNewOrder(callback, context) {
     var i, childCount, keepGoing;
     keepGoing = callback.call(context, this);
-    for (i = 0, childCount = this.children.length; i < childCount; i++) {
-      if (keepGoing === false) {
-        return true;
-      }
-      keepGoing = depthFirstPreOrder.call(this.children[i], callback, context);
+    if (keepGoing === false) {
+      return;
     }
-    return keepGoing;
+
+    for (i = 0, childCount = this.children.length; i < childCount; i++) {
+        depthFirstPreNewOrder.call(this.children[i], callback, context);
+    }
   };
 
   walkStrategies.post = function depthFirstPostOrder(callback, context) {
