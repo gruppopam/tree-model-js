@@ -24,7 +24,7 @@
     "sinon": "1.8.2",
     "chai": "1.9.0",
     "browserify": "3.31.2",
-    "uglify-js": "2.4.12"
+    "uglify-js": "3.8.0"
   },
   "dependencies": {
     "mergesort": "0.0.1",
